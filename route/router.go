@@ -10,7 +10,8 @@ func Route()  {
 
 	member := router.Group("/api/v1/member")
 	{
-		member.GET("/", controllers.FuncRes)
+		member.GET("/", controllers.FuncReq)
+		member.GET("/test", controllers.FuncReqTest)
 	}
 
 	router.Run()
