@@ -22,8 +22,7 @@ func Route()  {
 
 	member := router.Group("/api/v1/member")
 	{
-		member.GET("/", controllers.FuncReq)
-		member.GET("/test", controllers.FuncReqTest)
+		member.GET("/test", controllers.Test.FuncReqTest)
 	}
 
 	router.Run()

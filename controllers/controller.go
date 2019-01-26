@@ -1,15 +1,19 @@
 package controllers
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"go-api/services"
+)
 
-func FuncReq(c *gin.Context)  {
-	c.JSON(200, gin.H{
-		"message" : "test!",
-	})
+type TestController struct {
+
 }
 
-func FuncReqTest(c *gin.Context)  {
+
+var Test TestController
+
+func (self TestController) FuncReqTest(c *gin.Context)  {
 	c.JSON(200, gin.H{
-		"message" : "/api/v1/member/test 주소를 호출한 결과입니다.",
+		"message" : services.TestService.TestSer(),
 	})
 }
