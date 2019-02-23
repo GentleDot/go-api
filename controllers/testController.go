@@ -9,7 +9,6 @@ type TestController struct {
 
 }
 
-
 var Test TestController
 
 func (self TestController) FuncReqTest(c *gin.Context)  {
