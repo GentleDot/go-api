@@ -5,14 +5,14 @@ import (
 	"go-api/servers"
 )
 
-type TestRepository struct {
+type MemberRepository struct {
 
 }
 
-var TestRepo TestRepository
+var MemberRep MemberRepository
 
 
-func (self TestRepository) GetTest()(rsltArr[] model.Member){
+func (self MemberRepository) GetTest()(rsltArr[] model.Member){
 	// db 접속
 	dbmap := servers.Database().GetInstance()
 	dbmap.AddTableWithName(model.Member{}, "Member").SetKeys(true, "member_no")
@@ -26,10 +26,26 @@ func (self TestRepository) GetTest()(rsltArr[] model.Member){
 	_, err := dbmap.Select(&rsltArr, strQuery)
 	servers.CheckErr(err, "테이블 조회 실패!")
 
+
 	return rsltArr
 }
 
-func (self TestRepository) InsertMember(member[] model.Member)(){
+
+func (self *MemberRepository) InsertMember(member model.InsMember) error {
+
 	dbmap:= servers.Database().GetInstance()
-	dbmap.Insert()
+	dbmap.AddTableWithName(model.InsMember{}, "Member").SetKeys(true, "member_no")
+	trans, err := dbmap.Begin()
+
+	if err != nil{
+		return err
+	}
+
+	err = trans.Insert(&member)
+	servers.CheckErr(err, "저장에 실패하였습니다.")
+
+	return trans.Commit()
+
 }
+
+

@@ -11,8 +11,7 @@ func Route()  {
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowAllOrigins: true,
-		//AllowOrigins:     []string{"*"},
+		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"PUT", "POST", "DELETE", "GET"},
 		AllowHeaders:     []string{"Origin"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -23,6 +22,7 @@ func Route()  {
 	member := router.Group("/api/v1/member")
 	{
 		member.GET("/test", controllers.Test.FuncReqTest)
+		member.POST("/newMember", controllers.Member.InsMemberData)
 	}
 
 	router.Run()
