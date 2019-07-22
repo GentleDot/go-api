@@ -7,7 +7,7 @@
 ## 진행내용
 
 1. 20190721(일)
-    - Go lang으로 aouth2 구현하기
+    - Go lang으로 oauth2 구현하기
         - 참조한 페이지
             1. {https://github.com/zalando/gin-oauth2}
             1. {https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2}
