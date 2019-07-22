@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-api/model"
 	"go-api/services"
@@ -32,7 +33,7 @@ func (self MemberController) InsMemberData(c *gin.Context)  {
 	memberNm := member.MemberName
 	memberId := member.MemberId
 
-	//fmt.Println("id :" + memberId + " Nm :" + memberNm)
+	fmt.Println("id :" + memberId + " Nm :" + memberNm)
 
 	rslt := services.MemberServ.InsertMember(memberNm, memberId)
 

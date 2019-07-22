@@ -10,8 +10,8 @@ type Member struct {
 
 type InsMember struct {
 	MemberNo int64 			`db:"member_no"`
-	MemberName string 		`db:"member_id" json:"MemberId" form:"MemberId"`
-	MemberId string 		`db:"member_name" json:"MemberName" form:"MemberName"`
+	MemberName string 		`db:"member_id" json:"_MemberId" form:"_MemberId"`
+	MemberId string 		`db:"member_name" json:"_MemberName" form:"_MemberName"`
 /*	MemberRegDate string	`db:"member_reg_date"`
 	MemberUpdDate string	`db:"member_upd_date"`*/
 }
