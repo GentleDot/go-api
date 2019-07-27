@@ -17,3 +17,5 @@
             1. <https://tools.ietf.org/html/rfc6749#section-4.1>
             1. <https://blog.kowalczyk.info/article/f/Accessing-GitHub-API-from-Go.html>
             1. <https://github.com/go-oauth2/oauth2>
+            1. JWT(JSON Web Token) 이란? : <https://elfinlas.github.io/2018/08/12/whatisjwt-01/>
+            1. JWT를 구현하면서 마주치게 되는 고민들 : <https://swalloow.github.io/implement-jwt>
