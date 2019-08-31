@@ -3,10 +3,12 @@ package route
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"go-api/apiConfig"
 	"go-api/controllers"
 	"log"
 	"time"
 )
+
 
 func Route()  {
 	router := gin.Default()
@@ -22,24 +24,38 @@ func Route()  {
 
 
 
-	member := router.Group("/api/v1/member")
+	member := router.Group(apiConfig.PREFIX_URI + "member")
 	{
 		member.GET("/test", controllers.Test.FuncReqTest)
 		member.POST("/newMember", controllers.Member.InsMemberData)
 	}
 
-	oauth := router.Group("api/v1/oauth")
+	oauth := router.Group(apiConfig.PREFIX_URI + "oauthClient")
 	{
+		oauthClientController := controllers.Oauth
 
-		oauth.GET("/", controllers.Oauth.Init)
-		oauth.GET("/oauth2", controllers.Oauth.Oauth2)
-		oauth.GET("/refresh", controllers.Oauth.Refresh)
-		oauth.GET("/try", controllers.Oauth.Try)
-		oauth.GET("/pwo", controllers.Oauth.Pwd)
-		oauth.GET("/client", controllers.Oauth.Client)
+		oauth.GET("/", oauthClientController.Init)
+		oauth.GET("/oauth2", oauthClientController.Oauth2)
+		oauth.GET("/refresh", oauthClientController.Refresh)
+		oauth.GET("/try", oauthClientController.Try)
+		oauth.GET("/pwo", oauthClientController.Pwd)
+		oauth.GET("/client", oauthClientController.Client)
 
-		log.Println("Client is running at 8080 port.")
 		//log.Fatal(http.ListenAndServe(":8080", nil))
+		log.Println("클라이언트 라우터 동작!")
+	}
+
+	oauthServer := router.Group(apiConfig.PREFIX_URI + "oauthServer")
+	{
+		oauthServerController := controllers.OauthServer
+
+		oauthServer.GET("/login", oauthServerController.Login)
+		oauthServer.GET("/auth", oauthServerController.Auth )
+		oauthServer.GET("/authorize", oauthServerController.Authorize )
+		oauthServer.GET("/token", oauthServerController.Token )
+		oauthServer.GET("/test", oauthServerController.Test )
+
+		log.Println("서버 라우터 동작!")
 	}
 
 	router.Run()

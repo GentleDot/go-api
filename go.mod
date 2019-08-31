@@ -8,6 +8,7 @@ require (
 	github.com/gin-contrib/cors v0.0.0-20190101123304-5e7acb10687f
 	github.com/gin-gonic/gin v1.3.0
 	github.com/go-gorp/gorp v2.0.0+incompatible
+	github.com/go-session/session v3.1.2+incompatible
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b // indirect
 	github.com/golang/protobuf v1.3.2 // indirect

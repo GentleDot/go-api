@@ -5,9 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"go-api/services"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
 	"io"
+	"log"
 	"net/http"
 	"time"
 )
@@ -16,26 +18,16 @@ type oauthContoller struct {
 
 }
 
-const (
-	authServerURL = "http://localhost:9096"
-)
 
 var (
 	Oauth oauthContoller
-	config = oauth2.Config{
-		ClientID:     "222222",
-		ClientSecret: "22222222",
-		Scopes:       []string{"all"},
-		RedirectURL:  "http://localhost:9094/oauth2",
-		Endpoint: oauth2.Endpoint{
-			AuthURL:  authServerURL + "/authorize",
-			TokenURL: authServerURL + "/token",
-		},
-	}
+	config = services.OauthConfig
 	globalToken *oauth2.Token
 )
 func (self oauthContoller) Init(c *gin.Context) {
 	u := config.AuthCodeURL("xyz")
+	log.Println("redirectURL : ")
+	log.Println(u)
 	c.Redirect(http.StatusFound, u)
 
 }
@@ -101,7 +93,7 @@ func (self oauthContoller) Try(c *gin.Context){
 	}
 
 
-	resp, err := http.Get(fmt.Sprintf("%s/test?access_token=%s", authServerURL, globalToken.AccessToken))
+	resp, err := http.Get(fmt.Sprintf("%s/test?access_token=%s", services.AUTH_SERVER_URL, globalToken.AccessToken))
 	if err != nil {
 		c.String(http.StatusBadRequest, err.Error())
 		//http.Error(w, err.Error(), http.StatusBadRequest)
